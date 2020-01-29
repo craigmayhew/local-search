@@ -1,0 +1,67 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Search</title>
+  <meta name="description" content="Local search">
+  <meta name="author" content="Craig Mayhew">
+
+  <style>
+    a {
+        color: #ccc;
+    }
+    body{
+        background-color: #333;
+        color: #ccc;
+    }
+  </style>
+
+  <script>
+      var localFolders = [
+        {name: "Rust Docs", url: "file:///C:/Users/{username}/.rustup/toolchains/stable-x86_64-pc-windows-msvc/share/doc/rust/html/std/index.html?search={searchTerms}"},
+      ];
+      var remoteFolders = [
+        {name: "Reddit", url: "https://www.reddit.com/search?q={searchTerms}"},
+        {name: "Stack Overflow", url: "https://stackoverflow.com/search?q={searchTerms}"},
+        {name: "Ether Scan", url: "https://etherscan.io/search?f=0&q={searchTerms}"},
+        {name: "Duck Duck Go", url: "https://duckduckgo.com/?q={searchTerms}&t=canonical"},
+        {name: "Github", url: "https://github.com/search?q={searchTerms}&ref=opensearch"},
+        {name: "Twitter", url: "https://twitter.com/search?q={searchTerms}&src=typed_query"},
+        {name: "Wikipedia", url: "https://en.wikipedia.org/wiki/Special:Search?sort=relevance&search={searchTerms}&title=Special:Search&profile=advanced&fulltext=1"},
+        {name: "DevDocs", url: "https://devdocs.io/#q={searchTerms}"},
+        {name: "IPFS Search", url: "https://ipfs-search.com/#/search?search={searchTerms}"},
+      ];
+
+      function afterBodyLoaded() {
+        clearContent();
+        if (document.getElementById("username").value) {
+            localFolders.forEach(render);
+        }
+        remoteFolders.forEach(render);
+      }
+
+      function clearContent() {
+        document.getElementById("content").innerHTML = "";
+      }
+
+      function render(item, index, arr) {
+        var termsReplaced = item.url;
+        var termsReplaced = termsReplaced.replace("{username}", document.getElementById("username").value);
+        var termsReplaced = termsReplaced.replace("{searchTerms}", document.getElementById("searchTerms").value);
+        document.getElementById("content").innerHTML += '<a href="' + termsReplaced + '">'+item.name+'</a><br>';
+      }
+      
+  </script>
+
+</head>
+
+<body>
+    OS Username: <input type="text" id="username" onkeyup="afterBodyLoaded();"> &nbsp; &nbsp; &nbsp; 
+    Search Term: <input type="text" id="searchTerms" onkeyup="afterBodyLoaded();"><br><br>
+    <div id="content">
+
+    </div>
+</body>
+</html>
