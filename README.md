@@ -17,7 +17,7 @@ cargo install ripgrep
 ```
 
 ### Windows Usage
-Usage `search something`
+Usage `search "some thing"`
 ```powershell
 function search($searchTerms) {
   # search my github folder
@@ -30,14 +30,14 @@ function search($searchTerms) {
 ```
 
 ### Linux Usage
-Usage `search something`
+Usage `search some thing`
 ```sh
 search () {
   # search my github folder
-  rg $(echo $1) ~/GitHub/
+  rg "$(echo $@)" ~/GitHub/
   # search local rust docs
-  rg $(echo $1) ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/;
+  rg "$(echo $@)" ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/;
   # search local ipfs cache
-  rg $(echo $1) ~/.ipfs/blocks/
+  rg "$(echo $@)" ~/.ipfs/blocks/
 }
 ```
